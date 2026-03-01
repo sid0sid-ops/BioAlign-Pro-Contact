@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioAlign-Pro | Contact by Siddharth Tripathi</title>
+    <meta name="description" content="Contact page for BioAlign-Pro Pairwise DNA & Protein Sequence Alignment Tool.">
+    <meta name="author" content="Siddharth Tripathi">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (CDN with production plugins) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <script>
+        // Theme Initialization: Check local storage or system preference
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Roboto', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        background: 'var(--bg)',
+                        surface: 'var(--surface)',
+                        surfaceHover: 'var(--surface-hover)',
+                        primary: 'var(--primary)',
+                        destructive: 'var(--destructive)',
+                        muted: 'var(--muted)',
+                        border: 'var(--border)',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'slide-up': 'slideUp 0.4s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body
+    class="bg-background text-gray-900 dark:text-gray-100 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col">
+
+    <!-- Dynamic Background Canvas (DNA/Protein representation) -->
+    <canvas id="bgCanvas"
+        class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-20 dark:opacity-100"></canvas>
+
+    <!-- Navigation / Header (YouTube-like minimal header) -->
+    <nav
+        class="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border px-6 py-4 flex items-center justify-between shadow-sm relative">
+        <div class="flex items-center gap-3">
+            <div class="flex flex-col">
+                <span class="text-[9px] font-mono text-muted tracking-widest uppercase leading-none mb-1">CONTACT
+                    PAGE</span>
+                <h1 class="text-xl font-bold tracking-tight leading-none pt-0 mt-0 text-black dark:text-white mb-1">
+                    BioAlign<span id="proText"
+                        class="text-black dark:text-white transition-colors duration-300">-Pro</span></h1>
+                <span class="text-[0.6rem] italic text-muted font-serif tracking-wide leading-relaxed animate-motto">
+                    "Where chemicals became so advanced that they started studying themselves."
+                </span>
+            </div>
+        </div>
+        <div class="flex items-center gap-4 text-sm font-medium text-muted">
+            <button onclick="toggleTheme()"
+                class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors focus:outline-none"
+                title="Toggle Light/Dark Theme">
+                <i id="themeIcon" class="fa-solid fa-moon text-black dark:text-white"></i>
+            </button>
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://sid0sid-ops.github.io/BioAlign-Pro-Homepage/" target="_blank"
+                    class="flex items-center gap-2 px-3 py-1 hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:hover:text-white rounded-full transition-colors focus:outline-none"
+                    title="Home">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Menu Toggle -->
+            <button id="mobileMenuBtn" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"
+                class="md:hidden w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors focus:outline-none text-black dark:text-white">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobileMenu"
+                class="hidden absolute top-full mt-2 right-4 w-48 bg-surface border border-border rounded-xl shadow-xl flex flex-col py-2 z-50 animate-slide-up">
+                <a href="https://sid0sid-ops.github.io/BioAlign-Pro-Homepage/" target="_blank"
+                    class="w-full text-left px-4 py-3 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors flex items-center gap-3">
+                    <i class="fa-solid fa-house w-4"></i> Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow w-full max-w-2xl mx-auto px-4 py-12 flex flex-col gap-8 animate-fade-in relative z-10">
+
+        <section class="flex flex-col items-center justify-center pt-8 pb-4 gap-4 text-center animate-slide-up">
+            <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl text-black dark:text-white">
+                Get in Touch
+            </h2>
+            <p class="text-lg text-muted max-w-xl">Have a question about the algorithm or want to report an issue? Send
+                us a message and we'll get back to you.</p>
+        </section>
+
+        <!-- Contact Form Card -->
+        <section
+            class="bg-surface/80 backdrop-blur-md border border-border p-8 rounded-2xl shadow-xl w-full animate-slide-up relative overflow-hidden group">
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+            </div>
+
+            <form id="contactForm" class="relative z-10 space-y-6">
+                <!-- Name Field -->
+                <div class="space-y-2">
+                    <label for="name" class="block text-sm font-semibold text-black dark:text-white">Full Name</label>
+                    <div
+                        class="relative shine-wrapper rounded-lg overflow-hidden border border-border bg-background focus-within:ring-1 focus-within:ring-primary transition-all">
+                        <i
+                            class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm z-10 pointer-events-none"></i>
+                        <input type="text" id="name" name="name" required
+                            class="w-full bg-transparent py-3 pl-11 pr-4 text-sm text-gray-900 dark:text-white focus:outline-none relative z-10"
+                            placeholder="e.g., Jane Doe">
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="space-y-2">
+                    <label for="email" class="block text-sm font-semibold text-black dark:text-white">Email
+                        Address</label>
+                    <div
+                        class="relative shine-wrapper rounded-lg overflow-hidden border border-border bg-background focus-within:ring-1 focus-within:ring-primary transition-all">
+                        <i
+                            class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm z-10 pointer-events-none"></i>
+                        <input type="email" id="email" name="email" required
+                            class="w-full bg-transparent py-3 pl-11 pr-4 text-sm text-gray-900 dark:text-white focus:outline-none relative z-10"
+                            placeholder="e.g., jane@example.com">
+                    </div>
+                </div>
+
+                <!-- Subject Field -->
+                <div class="space-y-2">
+                    <label for="subject" class="block text-sm font-semibold text-black dark:text-white">Subject</label>
+                    <div
+                        class="relative shine-wrapper rounded-lg overflow-hidden border border-border bg-background focus-within:ring-1 focus-within:ring-primary transition-all">
+                        <i
+                            class="fa-solid fa-heading absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm z-10 pointer-events-none"></i>
+                        <input type="text" id="subject" name="subject" required
+                            class="w-full bg-transparent py-3 pl-11 pr-4 text-sm text-gray-900 dark:text-white focus:outline-none relative z-10"
+                            placeholder="Briefly describe your inquiry">
+                    </div>
+                </div>
+
+                <!-- Reason for Contact Field (Dropdown) -->
+                <div class="space-y-2">
+                    <label for="reason" class="block text-sm font-semibold text-black dark:text-white">Reason for
+                        Contact</label>
+                    <div
+                        class="relative shine-wrapper rounded-lg overflow-hidden border border-border bg-background focus-within:ring-1 focus-within:ring-primary transition-all">
+                        <i
+                            class="fa-solid fa-list absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm z-10 pointer-events-none"></i>
+                        <select id="reason" name="reason" required
+                            class="w-full bg-transparent bg-none py-3 pl-11 pr-10 text-sm text-gray-900 dark:text-white focus:outline-none relative z-10 appearance-none cursor-pointer border-none focus:ring-0">
+                            <option value="General Inquiry" class="dark:bg-gray-900">General Inquiry</option>
+                            <option value="Collaboration" class="dark:bg-gray-900">Collaboration</option>
+                            <option value="Feedback" class="dark:bg-gray-900">Feedback</option>
+                            <option value="Bug Report" class="dark:bg-gray-900">Bug Report</option>
+                        </select>
+                        <i
+                            class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-muted text-xs z-10 pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Message Field -->
+                <div class="space-y-2">
+                    <label for="message" class="block text-sm font-semibold text-black dark:text-white">Message</label>
+                    <div
+                        class="relative shine-wrapper rounded-lg overflow-hidden border border-border bg-background focus-within:ring-1 focus-within:ring-primary transition-all">
+                        <textarea id="message" name="message" required rows="5"
+                            class="w-full bg-transparent py-3 px-4 text-sm text-gray-900 dark:text-white focus:outline-none relative z-10 resize-y"
+                            placeholder="Write your message here..."></textarea>
+                    </div>
+                </div>
+
+                <!-- How did you find me Field -->
+                <div class="space-y-2">
+                    <label for="foundHow" class="block text-sm font-semibold text-black dark:text-white">How did you
+                        find
+                        me? (Optional)</label>
+                    <div
+                        class="relative shine-wrapper rounded-lg overflow-hidden border border-border bg-background focus-within:ring-1 focus-within:ring-primary transition-all">
+                        <i
+                            class="fa-solid fa-globe absolute left-4 top-1/2 -translate-y-1/2 text-muted text-sm z-10 pointer-events-none"></i>
+                        <input type="text" id="foundHow" name="foundHow"
+                            class="w-full bg-transparent py-3 pl-11 pr-4 text-sm text-gray-900 dark:text-white focus:outline-none relative z-10"
+                            placeholder="e.g., GitHub, Google, LinkedIn...">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="submitBtn"
+                    class="w-full py-4 bg-black text-white dark:bg-white dark:text-black hover:opacity-80 rounded-xl font-bold text-lg shadow-lg transition-all flex justify-center items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="fa-solid fa-paper-plane"></i> <span id="btnText">Send Message</span>
+                </button>
+            </form>
+
+            <!-- Success/Error Message Container -->
+            <div id="formStatus"
+                class="hidden mt-6 p-4 rounded-xl text-center font-medium animate-fade-in text-sm border"></div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
